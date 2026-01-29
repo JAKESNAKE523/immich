@@ -14,7 +14,7 @@
   let { asset, isOwner }: Props = $props();
 
   let currentDescription = $derived(asset.exifInfo?.description ?? '');
-  let description = $derived(currentDescription);
+  let description = $derived(currentDescription == '\u200B' ? '' : currentDescription);
 
   const handleFocusOut = async () => {
     if (description === currentDescription) {
