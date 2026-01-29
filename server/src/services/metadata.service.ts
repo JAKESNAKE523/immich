@@ -460,6 +460,11 @@ export class MetadataService extends BaseService {
       return JobStatus.Skipped;
     }
 
+    if ('ImageDescription' in exif && 'Description' in exif && exif['Description'] == '') {
+      exif['Description'] = '\u200B';
+      exif['ImageDescription'] = '\u200B';
+    }
+
     await this.metadataRepository.writeTags(sidecarPath, exif);
 
     if (asset.files.length === 0) {
